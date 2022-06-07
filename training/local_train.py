@@ -20,10 +20,10 @@ def load_group(filenames, prefix=''):
 	# stack group so that features are the 3rd dimension
 	loaded = dstack(loaded)
 	return loaded
- 
+
 # load a list of files and return as a 3d numpy array
 def load_dataset_group(group, prefix=''):
-    filepath = prefix + group + '/Inertial Signals/'
+	filepath = prefix + group + '/Inertial Signals/'
 	# load all 9 files as a single array
 	filenames = list()
 	# total acceleration
@@ -37,7 +37,7 @@ def load_dataset_group(group, prefix=''):
 	# load class output
 	y = load_file(prefix + group + '/y_'+group+'.txt')
 	return X, y
- 
+
 # load the dataset, returns train and test X and y elements
 def load_dataset(prefix=''):
 	# load all train
@@ -54,7 +54,7 @@ def load_dataset(prefix=''):
 	testy = to_categorical(testy)
 	print(trainX.shape, trainy.shape, testX.shape, testy.shape)
 	return trainX, trainy, testX, testy
- 
+
 # fit and evaluate a model
 def evaluate_model(trainX, trainy, testX, testy):
 	verbose, epochs, batch_size = 0, 10, 32
@@ -69,13 +69,13 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model.add(Dense(n_outputs, activation='softmax'))
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# fit network
-    model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
-    # save model
+	model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
+	# save model
 	model.save_weights("trained_model.h5")
-    # evaluate model
+	# evaluate model
 	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
 	return accuracy
- 
+
 # summarize scores
 def summarize_results(scores):
 	print(scores)

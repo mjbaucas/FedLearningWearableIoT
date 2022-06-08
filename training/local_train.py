@@ -2,8 +2,7 @@ from numpy import mean, std, dstack
 from pandas import read_csv
 from matplotlib import pyplot
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Flatten, Dropout
-from tensorflow.keras.layers.convolutional import Conv1D, MaxPooling1D
+from tensorflow.keras.layers import Dense, Flatten, Dropout, Conv1D, MaxPool1D
 from tensorflow.keras.utils import to_categorical
 
 # load a single file as a numpy array
@@ -63,7 +62,7 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(n_timesteps,n_features)))
 	model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
 	model.add(Dropout(0.5))
-	model.add(MaxPooling1D(pool_size=2))
+	model.add(MaxPool1D(pool_size=2))
 	model.add(Flatten())
 	model.add(Dense(100, activation='relu'))
 	model.add(Dense(n_outputs, activation='softmax'))

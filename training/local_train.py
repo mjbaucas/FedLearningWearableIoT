@@ -1,8 +1,8 @@
 from numpy import mean, std, dstack
 from pandas import read_csv
-from matplotlib import pyplot as plt 
+from matplotlib import pyplot
 from keras.models import Sequential
-from keras.layers import Dense, Flatten, Drouput
+from keras.layers import Dense, Flatten, Dropout
 from keras.layers.convolutional import Conv1D, MaxPooling1D
 from keras.utils import to_categorical
 

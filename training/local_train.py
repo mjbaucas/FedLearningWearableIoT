@@ -1,10 +1,10 @@
 from numpy import mean, std, dstack
 from pandas import read_csv
 from matplotlib import pyplot
-from keras.models import Sequential
-from keras.layers import Dense, Flatten, Dropout
-from keras.layers.convolutional import Conv1D, MaxPooling1D
-from keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten, Dropout
+from tensorflow.keras.layers.convolutional import Conv1D, MaxPooling1D
+from tensorflow.keras.utils import to_categorical
 
 # load a single file as a numpy array
 def load_file(filepath):

@@ -75,7 +75,7 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model_yaml = model.to_yaml()
 	with open("model.yaml", "w") as yaml_file:
 		yaml_file.write(model_yaml)
-	model.save_weights("trained_model.md5")
+	model.save("trained_model.h5")
 	return accuracy
 
 # summarize scores

@@ -58,7 +58,7 @@ def load_dataset(prefix=''):
 def load_models(num_models):
     models = []
     for i in range(1, num_models):
-        models.append(load_model(f'./training/training_model{i}.md5'))
+        models.append(load_weights(f'./training/training_model{i}.md5'))
     return models
 
 def aggregate_weights(weights, models):
@@ -105,7 +105,7 @@ def evaluate_model(trainX, trainy, testX, testy):
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     # fit network
     model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
-    # save model
+    # save weights
     model.save_weights("trained_model.md5")
     # evaluate model
     _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)

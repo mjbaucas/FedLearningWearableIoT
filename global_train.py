@@ -1,7 +1,7 @@
 from numpy import mean, std, dstack
 from pandas import read_csv
 from matplotlib import pyplot as plt 
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Flatten, Dropout, Conv1D, MaxPool1D
 from tensorflow.keras.utils import to_categorical
 from tensorflow import keras
@@ -58,7 +58,7 @@ def load_dataset(prefix=''):
 def load_models(num_models):
     models = []
     for i in range(1, num_models):
-        models.append(keras.model.load_model(f'./training/model+{num_models}.md5'))
+        models.append(load_model(f'./training/training_model{i}.md5'))
     return models
 
 def aggregate_weights(weights, models):

@@ -25,16 +25,16 @@ def aggregate_weights(weights, models):
 
 # fit and evaluate a model
 def evaluate_model(trainX, trainy, testX, testy):
-	verbose, epochs, batch_size = 0, 5, 2
-	n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
-	model = Sequential()
-	model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(n_timesteps,n_features)))
-	model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
-	model.add(Dropout(0.5))
-	model.add(MaxPooling1D(pool_size=2))
-	model.add(Flatten())
-	model.add(Dense(100, activation='relu'))
-	model.add(Dense(n_outputs, activation='softmax'))
+    verbose, epochs, batch_size = 0, 5, 2
+    n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
+    model = Sequential()
+    model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(n_timesteps,n_features)))
+    model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(MaxPooling1D(pool_size=2))
+    model.add(Flatten())
+    model.add(Dense(100, activation='relu'))
+    model.add(Dense(n_outputs, activation='softmax'))
 
     # Fix this.... needs to load history from somewhere
     weights = [0.91,0.91,0.91] # placeholder
@@ -54,34 +54,34 @@ def evaluate_model(trainX, trainy, testX, testy):
     models = load_models(4)
     average_weights = aggregate_weights(weights, models):
     model.set_weights(average_weights)
-	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-	# fit network
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    # fit network
     model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
     # save model
-	model.save_weights("trained_model.md5")
+    model.save_weights("trained_model.md5")
     # evaluate model
-	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
-	return accuracy
+    _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+    return accuracy
 
 # summarize scores
 def summarize_results(scores):
-	print(scores)
-	m, s = mean(scores), std(scores)
-	print('Accuracy: %.3f%% (+/-%.3f)' % (m, s))
+    print(scores)
+    m, s = mean(scores), std(scores)
+    print('Accuracy: %.3f%% (+/-%.3f)' % (m, s))
 
 # run an experiment
 def run_experiment(repeats=10):
-	# load data
-	trainX, trainy, testX, testy = load_dataset()
-	# repeat experiment
-	scores = list()
-	for r in range(repeats):
-		score = evaluate_model(trainX, trainy, testX, testy)
-		score = score * 100.0
-		print('>#%d: %.3f' % (r+1, score))
-		scores.append(score)
-	# summarize results
-	summarize_results(scores)
+    # load data
+    trainX, trainy, testX, testy = load_dataset()
+    # repeat experiment
+    scores = list()
+    for r in range(repeats):
+        score = evaluate_model(trainX, trainy, testX, testy)
+        score = score * 100.0
+        print('>#%d: %.3f' % (r+1, score))
+        scores.append(score)
+    # summarize results
+    summarize_results(scores)
 
 # run the experiment
 run_experiment()

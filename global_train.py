@@ -52,7 +52,7 @@ def evaluate_model(trainX, trainy, testX, testy):
     
     # Aggregate weights
     models = load_models(4)
-    average_weights = aggregate_weights(weights, models):
+    average_weights = aggregate_weights(weights, models)
     model.set_weights(average_weights)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     # fit network

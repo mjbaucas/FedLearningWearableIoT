@@ -69,10 +69,13 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# fit network
 	model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
-	# save model
-	model.save_weights("trained_model.h5")
 	# evaluate model
 	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+	# save model
+	model_yaml = model.to_yaml()
+	with open("model.yaml", "w") as yaml_files:
+		yaml_file.write(model_yaml)
+	model.save_weights("trained_model.h5")
 	return accuracy
 
 # summarize scores

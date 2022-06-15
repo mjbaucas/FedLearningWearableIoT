@@ -10,7 +10,7 @@ from tensorflow import keras
 def load_models(num_models):
     models = []
     for i in range(1, num_models):
-        models.append(keras.model.load_model(f'./model+{num_models}.h5'))
+        models.append(keras.model.load_model(f'./training/model+{num_models}.md5'))
     return models
 
 def aggregate_weights(weights, models):

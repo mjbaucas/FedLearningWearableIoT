@@ -92,7 +92,7 @@ def evaluate_model(trainX, trainy, testX, testy):
     x = min(weights)
     idx = weights.index(x)
     weights[idx] = 0.02
-    for i in range(3):
+    for i in range(len(weights)):
         if(weights[i] != 1 and weights[i] != 0.02):
             weights[i] = 0.03
             break

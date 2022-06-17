@@ -60,9 +60,8 @@ def load_dataset(prefix=''):
 
 def load_models(num_models):
     models = []
-    for i in range(1, num_models):
-        models.append(load_model(f'./training/trained_model{i}.h5'))
-        print("MODEL::::::" + str(i))
+    for i in range(0, num_models):
+        models.append(load_model(f'./training/trained_model{i+1}.h5'))
     return models
 
 def aggregate_weights(weights, models):

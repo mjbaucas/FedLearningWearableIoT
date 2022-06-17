@@ -2,7 +2,7 @@
 
 from numpy import mean, std, dstack
 from pandas import read_csv
-from matplotlib import plt
+from matplotlib import pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Dropout, Conv1D, MaxPool1D
 from tensorflow.keras.utils import to_categorical

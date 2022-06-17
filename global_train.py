@@ -59,6 +59,7 @@ def load_models(num_models):
     models = []
     for i in range(1, num_models):
         models.append(load_model(f'./training/trained_model{i}.h5'))
+        print("MODEL::::::" + i)
     return models
 
 def aggregate_weights(weights, models):
@@ -67,8 +68,6 @@ def aggregate_weights(weights, models):
     n_layers = len(models[0].get_weights())
     for layer in range(n_layers):
         layer_weights = array([model.get_weights()[layer] for model in models])
-        print(layer_weights)
-        print(weights)
         average_layer_weights = average(layer_weights, axis=0, weights=weights)
         average_model_weights.append(average_layer_weights)
     return average_model_weights

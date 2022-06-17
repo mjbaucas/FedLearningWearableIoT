@@ -57,29 +57,29 @@ def load_dataset(prefix=''):
 	return trainX, trainy, testX, testy
 
 def plot_data(history, epochs):
-    epochs_range = range(epochs)
-    train_loss = history.history['loss']
-    val_loss = history.history['val_loss']
-    train_acc = history.history['accuracy']
-    val_acc = history.history['val_accuracy']
-    
-    plt.figure(0)
-    plt.plot(epochs_range,train_loss,marker='o',label="Training Loss")
-    plt.plot(epochs_range,val_loss,marker='o',label="Validation Loss")
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.legend()
+	epochs_range = range(epochs)
+	train_loss = history.history['loss']
+	val_loss = history.history['val_loss']
+	train_acc = history.history['accuracy']
+	val_acc = history.history['val_accuracy']
+
+	plt.figure(0)
+	plt.plot(epochs_range,train_loss,marker='o',label="Training Loss")
+	plt.plot(epochs_range,val_loss,marker='o',label="Validation Loss")
+	plt.xlabel("Epoch")
+	plt.ylabel("Loss")
+	plt.legend()
 	plt.grid(linestyle = '--', linewidth = 0.5)
-    plt.savefig('loss.png')
-    
-    plt.figure(1)
-    plt.plot(epochs_range,train_acc,marker='o',label="Training Accuracy")
-    plt.plot(epochs_range,val_acc,marker='o',label="Validation Accuracy")
-    plt.xlabel("Epoch")
-    plt.ylabel("Accuracy")
-    plt.legend()
+	plt.savefig('loss.png')
+
+	plt.figure(1)
+	plt.plot(epochs_range,train_acc,marker='o',label="Training Accuracy")
+	plt.plot(epochs_range,val_acc,marker='o',label="Validation Accuracy")
+	plt.xlabel("Epoch")
+	plt.ylabel("Accuracy")
+	plt.legend()
 	plt.grid(linestyle = '--', linewidth = 0.5)
-    plt.savefig('accuracy.png')
+	plt.savefig('accuracy.png')
 
 # fit and evaluate a model
 def evaluate_model(trainX, trainy, testX, testy):

@@ -60,8 +60,8 @@ def plot_data(history, epochs):
 	epochs_range = range(epochs)
 	train_loss = history.history['loss']
 	val_loss = history.history['val_loss']
-	train_acc = history.history['accuracy']
-	val_acc = history.history['val_accuracy']
+	train_acc = history.history['acc']
+	val_acc = history.history['val_acc']
 
 	plt.figure(0)
 	plt.plot(epochs_range,train_loss,marker='o',label="Training Loss")
@@ -95,12 +95,12 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model.add(Dense(n_outputs, activation='softmax'))
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# fit network
-	history = model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
+	history = model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose, validation_split=0.15)
 	# evaluate model
 	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
 	# plot data
-	print(history.history.keys())
-	# plot_data(history, epochs)
+	# print(history.history.keys())
+	plot_data(history, epochs)
 	# save model
 	model.save("trained_model.h5")
 	return accuracy

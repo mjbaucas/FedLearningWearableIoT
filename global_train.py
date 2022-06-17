@@ -84,8 +84,7 @@ def evaluate_model(trainX, trainy, testX, testy):
     model.add(Dense(100, activation='relu'))
     model.add(Dense(n_outputs, activation='softmax'))
 
-    # Fix this.... needs to load history from somewhere
-    weights = [0.91,0.91,0.91] # placeholder
+    weights = [0.893, 0.917] # change for each time ran with accuracies from generated models
     # weights = [max(history_1.history['accuracy']), max(history_2.history['accuracy']), max(history_3.history['accuracy'])]
     x = max(weights)
     idx = weights.index(x)
@@ -99,7 +98,7 @@ def evaluate_model(trainX, trainy, testX, testy):
             break
     
     # Aggregate weights
-    models = load_models(4)
+    models = load_models(2)
     average_weights = aggregate_weights(weights, models)
     model.set_weights(average_weights)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -118,7 +117,7 @@ def summarize_results(scores):
     print('Accuracy: %.3f%% (+/-%.3f)' % (m, s))
 
 # run an experiment
-def run_experiment(repeats=10):
+def run_experiment(repeats=1):
     # load data
     trainX, trainy, testX, testy = load_dataset()
     # repeat experiment

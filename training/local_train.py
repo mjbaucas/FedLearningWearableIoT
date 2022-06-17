@@ -95,9 +95,9 @@ def evaluate_model(trainX, trainy, testX, testy):
 	model.add(Dense(n_outputs, activation='softmax'))
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# fit network
-	model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
+	history = model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
 	# evaluate model
-	history, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
 	# plot data
 	plot_data(history, epochs)
 	# save model

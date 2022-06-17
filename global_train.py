@@ -1,3 +1,6 @@
+# The code for the federated learning is from - https://github.com/dilbwagsingh/HAR-using-Federated-Learning/blob/main/notebook.ipynb
+# The code of the neural network is from - https://machinelearningmastery.com/cnn-models-for-human-activity-recognition-time-series-classification/
+
 from numpy import mean, std, dstack, array, average
 from pandas import read_csv
 from matplotlib import pyplot as plt 
@@ -59,7 +62,7 @@ def load_models(num_models):
     models = []
     for i in range(1, num_models):
         models.append(load_model(f'./training/trained_model{i}.h5'))
-        print("MODEL::::::" + i)
+        print("MODEL::::::" + str(i))
     return models
 
 def aggregate_weights(weights, models):

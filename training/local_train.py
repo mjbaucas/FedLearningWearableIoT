@@ -1,3 +1,5 @@
+# The code of the neural network is from - https://machinelearningmastery.com/cnn-models-for-human-activity-recognition-time-series-classification/
+
 from numpy import mean, std, dstack
 from pandas import read_csv
 from matplotlib import pyplot

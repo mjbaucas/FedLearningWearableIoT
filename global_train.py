@@ -58,7 +58,7 @@ def load_dataset(prefix=''):
 def load_models(num_models):
     models = []
     for i in range(1, num_models):
-        models.append(load_weights(f'./training/training_model{i}.h5'))
+        models.append(load_model(f'./training/training_model{i}.h5'))
     return models
 
 def aggregate_weights(weights, models):

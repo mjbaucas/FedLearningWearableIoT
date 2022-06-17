@@ -75,7 +75,7 @@ def aggregate_weights(weights, models):
     return average_model_weights
 
 # fit and evaluate a model
-def evaluate_model(trainX, trainy, testX, testy):
+def evaluate_model(trainX, trainy, testX, testy, model_count):
     verbose, epochs, batch_size = 0, 10, 8
     n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
     model = Sequential()
@@ -101,7 +101,7 @@ def evaluate_model(trainX, trainy, testX, testy):
             break
     
     # Aggregate weights
-    models = load_models(2)
+    models = load_models(model_count)
     average_weights = aggregate_weights(weights, models)
     model.set_weights(average_weights)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -120,13 +120,13 @@ def summarize_results(scores):
     print('Accuracy: %.3f%% (+/-%.3f)' % (m, s))
 
 # run an experiment
-def run_experiment(repeats=1):
+def run_experiment(repeats=1, model_count=10):
     # load data
     trainX, trainy, testX, testy = load_dataset()
     # repeat experiment
     scores = list()
     for r in range(repeats):
-        score = evaluate_model(trainX, trainy, testX, testy)
+        score = evaluate_model(trainX, trainy, testX, testy, model_count)
         score = score * 100.0
         print('>#%d: %.3f' % (r+1, score))
         scores.append(score)

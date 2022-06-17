@@ -2,7 +2,7 @@
 
 from numpy import mean, std, dstack
 from pandas import read_csv
-from matplotlib import pyplot
+from matplotlib import plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Dropout, Conv1D, MaxPool1D
 from tensorflow.keras.utils import to_categorical
@@ -56,6 +56,31 @@ def load_dataset(prefix=''):
 	print(trainX.shape, trainy.shape, testX.shape, testy.shape)
 	return trainX, trainy, testX, testy
 
+def plot_data(history, epochs):
+    epochs_range = range(epochs)
+    train_loss = history.history['loss']
+    val_loss = history.history['val_loss']
+    train_acc = history.history['accuracy']
+    val_acc = history.history['val_accuracy']
+    
+    plt.figure(0)
+    plt.plot(epochs_range,train_loss,marker='o',label="Training Loss")
+    plt.plot(epochs_range,val_loss,marker='o',label="Validation Loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+	plt.grid(linestyle = '--', linewidth = 0.5)
+    plt.savefig('loss.png')
+    
+    plt.figure(1)
+    plt.plot(epochs_range,train_acc,marker='o',label="Training Accuracy")
+    plt.plot(epochs_range,val_acc,marker='o',label="Validation Accuracy")
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.legend()
+	plt.grid(linestyle = '--', linewidth = 0.5)
+    plt.savefig('accuracy.png')
+
 # fit and evaluate a model
 def evaluate_model(trainX, trainy, testX, testy):
 	verbose, epochs, batch_size = 0, 10, 8
@@ -72,7 +97,9 @@ def evaluate_model(trainX, trainy, testX, testy):
 	# fit network
 	model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
 	# evaluate model
-	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+	history, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+	# plot data
+	plot_data(history, epochs)
 	# save model
 	model.save("trained_model.h5")
 	return accuracy

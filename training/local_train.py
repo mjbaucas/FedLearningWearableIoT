@@ -99,7 +99,8 @@ def evaluate_model(trainX, trainy, testX, testy):
 	# evaluate model
 	_, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
 	# plot data
-	plot_data(history, epochs)
+	print(history.history.keys())
+	# plot_data(history, epochs)
 	# save model
 	model.save("trained_model.h5")
 	return accuracy

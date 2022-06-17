@@ -1,4 +1,4 @@
-from numpy import mean, std, dstack
+from numpy import mean, std, dstack, array, average
 from pandas import read_csv
 from matplotlib import pyplot as plt 
 from tensorflow.keras.models import Sequential, load_model
@@ -66,8 +66,8 @@ def aggregate_weights(weights, models):
     n_models = len(models)
     n_layers = len(models[0].get_weights())
     for layer  in range(n_layers):
-        layer_weights = np.array([model.get_weights()[layer] for model in models])
-        average_layer_weights = np.average(layer_weights, axis=0, weights=weights)
+        layer_weights = array([model.get_weights()[layer] for model in models])
+        average_layer_weights = average(layer_weights, axis=0, weights=weights)
         average_model_weights.append(average_layer_weights)
     return average_model_weights
 

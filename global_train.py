@@ -87,15 +87,15 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     model.add(Dense(100, activation='relu'))
     model.add(Dense(n_outputs, activation='softmax'))
 
-    weights = [0.893, 0.917] # change for each time ran with accuracies from generated models
+    weights = [0.9050, 0.9114, 0.9013, 0.9125, 0.9169, 0.9104, 0.9125,0.9013, 0.8941, 0.8914] # change for each time ran with accuracies from generated models
     # weights = [max(history_1.history['accuracy']), max(history_2.history['accuracy']), max(history_3.history['accuracy'])]
     x = max(weights)
     idx = weights.index(x)
-    weights[idx] = 0.5
+    weights[idx] = 1
     for i in range(len(weights)):
-        if(weights[i] != 0.5):
-            weights[i] = 0.5/len(weights)
-            break
+        if(weights[i] != 1):
+            #weights[i] = 0.01       
+            weights[i] = 0.02/(len(weights)-1)
     
     # Aggregate weights
     models = load_models(model_count)

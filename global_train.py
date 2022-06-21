@@ -106,7 +106,7 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     model.set_weights(average_weights)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     # fit network
-    model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
+    # model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
     # save weights
     model.save("global_model.h5")
     # evaluate model

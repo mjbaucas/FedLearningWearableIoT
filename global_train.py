@@ -108,7 +108,7 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     # fit network
     model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
     # save weights
-    model.save_weights("trained_model.md5")
+    model.save("global_model.h5")
     # evaluate model
     _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
     return accuracy

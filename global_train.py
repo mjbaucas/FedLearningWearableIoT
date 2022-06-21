@@ -91,13 +91,10 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     # weights = [max(history_1.history['accuracy']), max(history_2.history['accuracy']), max(history_3.history['accuracy'])]
     x = max(weights)
     idx = weights.index(x)
-    weights[idx] = 1
-    x = min(weights)
-    idx = weights.index(x)
-    weights[idx] = 0.02
+    weights[idx] = 0.5
     for i in range(len(weights)):
-        if(weights[i] != 1 and weights[i] != 0.02):
-            weights[i] = 0.03
+        if(weights[i] != 0.5):
+            weights[i] = 0.5/len(weights)
             break
     
     # Aggregate weights

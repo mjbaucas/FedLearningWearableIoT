@@ -8,6 +8,22 @@ from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Flatten, Dropout, Conv1D, MaxPool1D
 from tensorflow.keras.utils import to_categorical
 from tensorflow import keras
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
+# plot confusion matrix
+def plot(y_test, y_pred):
+    confusionMatrix = confusion_matrix(y_test, y_pred)
+    sns.set(font_scale=1.5)
+    labels = ["WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LYING"]
+    plt.figure(figsize=(16,7))
+    sns.heatmap(confusionMatrix, cmap = "Blues", annot = True, fmt = ".0f", xticklabels=labels, yticklabels=labels)
+    plt.xlabel('Predicted Class', fontsize = 20)
+    plt.ylabel('Original Class', fontsize = 20)
+    plt.grid()
+    plt.tick_params(labelsize = 15)
+    plt.xticks(rotation = 45)
+    plt.show()
 
 # load a single file as a numpy array
 def load_file(filepath):
@@ -108,6 +124,9 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     model.save("global_model.h5")
     # evaluate model
     _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+    predY = model.predict(testX)
+    predY = np.argmax(predY, axis=1)
+    plot(testy, predY)
     return accuracy
 
 # summarize scores

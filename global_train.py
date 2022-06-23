@@ -1,7 +1,7 @@
 # The code for the federated learning is from - https://github.com/dilbwagsingh/HAR-using-Federated-Learning/blob/main/notebook.ipynb
 # The code of the neural network is from - https://machinelearningmastery.com/cnn-models-for-human-activity-recognition-time-series-classification/
 
-from numpy import mean, std, dstack, array, average
+from numpy import mean, std, dstack, array, average, argmax
 from pandas import read_csv
 from matplotlib import pyplot as plt 
 from tensorflow.keras.models import Sequential, load_model
@@ -125,7 +125,7 @@ def evaluate_model(trainX, trainy, testX, testy, model_count):
     # evaluate model
     _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
     predY = model.predict(testX)
-    predY = np.argmax(predY, axis=1)
+    predY = argmax(predY, axis=1)
     plot(testy, predY)
     return accuracy
 

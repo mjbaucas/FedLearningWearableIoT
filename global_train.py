@@ -14,16 +14,16 @@ import seaborn as sns
 # plot confusion matrix
 def plot(y_test, y_pred):
     confusionMatrix = confusion_matrix(y_test.argmax(axis=1), y_pred.argmax(axis=1))
-    sns.set(font_scale=1.5)
+    sns.set(font_scale=1.0)
     labels = ["WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LYING"]
     plt.figure()
-    sns.heatmap(confusionMatrix, cmap = "Blues", annot = True, fmt = ".0f", xticklabels=labels, yticklabels=labels)
-    plt.xlabel('Predicted Class', fontsize = 20)
-    plt.ylabel('Original Class', fontsize = 20)
+    sns.heatmap(confusionMatrix, cmap = "coolwarm", annot = True, fmt = ".0f", xticklabels=labels, yticklabels=labels)
+    plt.xlabel('Predicted Class', fontsize = 18)
+    plt.ylabel('Original Class', fontsize = 18)
     plt.grid()
-    plt.tick_params(labelsize = 15)
+    plt.tick_params(labelsize = 13)
     plt.xticks(rotation = 45)
-    plt.show()
+    plt.savefig('confusion.png')
 
 # load a single file as a numpy array
 def load_file(filepath):

@@ -21,7 +21,7 @@ def plot(y_test, y_pred):
     plt.xlabel('Predicted Class', fontsize = 10)
     plt.ylabel('Original Class', fontsize = 10)
     plt.grid()
-    plt.subplots_adjust(bottom=0.40, left=0.30)
+    plt.subplots_adjust(bottom=0.30, left=0.20)
     plt.tick_params(labelsize = 8)
     plt.xticks(rotation = 45)
     plt.savefig('confusion.png')

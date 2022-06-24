@@ -15,13 +15,14 @@ import seaborn as sns
 def plot(y_test, y_pred):
     confusionMatrix = confusion_matrix(y_test.argmax(axis=1), y_pred.argmax(axis=1))
     sns.set(font_scale=1.0)
-    labels = ["WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LYING"]
+    labels = ["walking", "walking_upstairs", "walking_downstairs", "sitting", "standing", "lying"]
     plt.figure()
-    sns.heatmap(confusionMatrix, cmap = "coolwarm", annot = True, fmt = ".0f", xticklabels=labels, yticklabels=labels)
-    plt.xlabel('Predicted Class', fontsize = 18)
-    plt.ylabel('Original Class', fontsize = 18)
+    sns.heatmap(confusionMatrix, cmap = "cividis", annot = True, fmt = ".0f", xticklabels=labels, yticklabels=labels)
+    plt.xlabel('Predicted Class', fontsize = 10)
+    plt.ylabel('Original Class', fontsize = 10)
     plt.grid()
-    plt.tick_params(labelsize = 13)
+    plt.subplots_adjust(bottom=0.40, left=0.30)
+    plt.tick_params(labelsize = 8)
     plt.xticks(rotation = 45)
     plt.savefig('confusion.png')
 
